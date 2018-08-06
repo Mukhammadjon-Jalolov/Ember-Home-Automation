@@ -1,0 +1,35 @@
+{{yield}}
+<h2> Automate devices here </h2>
+<meta name="viewport" content="width=device-width">
+<ul>                             
+  {{#each tasks as |elem|}}
+    {{elem.Name}} - {{elem.Readings.state.Value}} <button id="cancelbtn" {{action "cancelit" elem.Name}}>Cancel it</button> <br><br>
+  {{/each}}
+</ul>
+
+{{#power-select
+  selected=autodevice
+  options=realmod
+  onchange=(action "chooseDevice")
+  as |name|
+}}
+  {{name}}
+{{/power-select}}
+
+{{#power-select
+  selected=commandtosend
+  options=commands
+  onchange=(action "choosecommand")
+  as |name|
+}}
+  {{name}}
+{{/power-select}}
+
+<input type="time" name="start" value="starttime" onchange={{action "startit"}}>
+
+<button id="sendcommandbutton" {{action "sendcommand" destination commandtosend}}>Automate</button>
+
+
+
+
+

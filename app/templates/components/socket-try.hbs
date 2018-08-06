@@ -1,0 +1,25 @@
+{{yield}}
+<meta name="viewport" content="width=device-width">
+<div class="container">
+<article>
+
+<ul>
+  {{#each realmodel as |elem|}}
+  <div class="elements">
+    <li>{{elem.Name}} is {{elem.Internals.STATE}}</li>
+		<label class="switch">
+			<input type="checkbox" onchange={{action "sendButtonPressed" elem.Name elem.Internals.STATE}}> 
+			<span class="slider round"></span>
+		</label>
+
+	{{#unless elem.Attributes.webCmd}}
+	<input type="range" value={{sec}} oninput = {{action "rangeaction" elem.Name}}>
+	{{/unless}}
+	<br><br>
+	</div>
+  {{/each}}
+</ul>
+
+</article>
+<footer>FHEM home</footer>
+</div>

@@ -1,0 +1,27 @@
+<h2>Monitoring devices </h2>
+{{yield}}
+<meta name="viewport" content="width=device-width">
+<div class="container">
+<article>
+
+<ul>
+  {{#each realmodel as |elem|}}
+  <div class="elements">
+{{#if elem.Internals.NR}}
+  <img id="onicon" src="assets/images/onicon.png">
+{{else}}
+  <img id="officon" src="assets/images/officon.png">
+{{/if}}
+
+  <li>{{elem.Name}} is {{elem.Internals.STATE}}</li>
+
+	<br><br>
+	</div>
+  {{/each}}
+</ul>
+<br>
+{{ember-chart type="doughnut" data=piedata options=options width=600 height=400}}
+
+</article>
+<footer>FHEM home</footer>
+</div>
