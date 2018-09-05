@@ -1,0 +1,3 @@
+https://emberobserver.com/addons/emberx-select
+
+https://www.zivtech.com/blog/ember-2x-dynamic-select-dropdowns

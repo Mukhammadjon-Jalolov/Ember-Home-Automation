@@ -1,12 +1,12 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-module('Unit | Adapter | oneroute', function(hooks) {
+module('Unit | Controller | automation', function(hooks) {
   setupTest(hooks);
 
   // Replace this with your real tests.
   test('it exists', function(assert) {
-    let adapter = this.owner.lookup('adapter:oneroute');
-    assert.ok(adapter);
+    let controller = this.owner.lookup('controller:automation');
+    assert.ok(controller);
   });
 });

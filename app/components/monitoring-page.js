@@ -4,7 +4,6 @@ import { inject as service} from '@ember/service';
 
 export default Component.extend({
 	socketIOService: service('socket-io'),
-	realmodel: [],
 	energymodel: [],
 	
 	didInsertElement() {
@@ -22,33 +21,18 @@ export default Component.extend({
 			});
 	
 	socket.emit('command', 'jsonlist2', function (data) {
-					var rawrealmodel = [];
 					var energy = [];
 					var stringdata = data.join("");
 					var re = /Bye.../gi;
 					var purestr = stringdata.replace(re, " ");
 					var jsobj = JSON.parse(purestr);
 					for (var i=0; i < jsobj.Results.length; i++){
-							if(!/((schedule)|(new)|(fs20log)|(temp)|(telnet)|(WEB)|(autocreate)|(global)|(Logfile)|(initialUsb)|(eventTypes))/.test(jsobj.Results[i].Name)){
-								
-								if (jsobj.Results[i].Internals.STATE=="off"){
-									jsobj.Results[i].Internals.NR = false;
-								}
-								
-								else if (!jsobj.Results[i].Internals.STATE=="off"){
-									jsobj.Results[i].Internals.NR = true;
-								}
-
-								rawrealmodel.push(jsobj.Results[i]);
-								
-								}
-							
-							if (/energy/.test(jsobj.Results[i].Name)){
-									energy.push(jsobj.Results[i].Name);
+						
+							if(/(energy)/.test(jsobj.Results[i].Name)){
+								energy.push(jsobj.Results[i]);
 								}
 						}
 						
-					self.set('realmodel', rawrealmodel);
 					self.set('energymodel', energy);
             });
 			
@@ -63,16 +47,10 @@ export default Component.extend({
 	assign: function(data){
 		var devnam = "";
 		for (devnam in data) {
-		for (var i=0; i < this.get('realmodel').length; i++) {
-		if (this.get('realmodel')[i].Name === devnam){
-			var elem = this.get('realmodel')[i].Internals;
+		for (var i=0; i < this.get('energymodel').length; i++) {
+		if (this.get('energymodel')[i].Name === devnam){
+			var elem = this.get('energymodel')[i].Internals;
 			Ember.set(elem, 'STATE', data[devnam]);
-				if (this.get('realmodel')[i].Internals.STATE==="off"){
-					Ember.set(elem, 'NR', false);
-				}
-				else {
-					Ember.set(elem, 'NR', true);
-				}
 			}
 		}
 	}

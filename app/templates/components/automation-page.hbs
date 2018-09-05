@@ -1,4 +1,5 @@
 {{yield}}
+
 <h2> Automate devices here </h2>
 <meta name="viewport" content="width=device-width">
 <ul>                             
@@ -6,7 +7,8 @@
     {{elem.Name}} - {{elem.Readings.state.Value}} <button id="cancelbtn" {{action "cancelit" elem.Name}}>Cancel it</button> <br><br>
   {{/each}}
 </ul>
-
+<br><br>
+{{info}}
 {{#power-select
   selected=autodevice
   options=realmod
@@ -25,11 +27,85 @@
   {{name}}
 {{/power-select}}
 
+
 <input type="time" name="start" value="starttime" onchange={{action "startit"}}>
 
-<button id="sendcommandbutton" {{action "sendcommand" destination commandtosend}}>Automate</button>
+<button id="sendcommand" {{action "sendcommand" autodevice commandtosend}}> Set </button>
+<br><br>
+
+<br><br>
+{{info1}}
+{{#power-select
+  selected=firstdevice
+  options=realmod
+  onchange=(action "chooseDevice1")
+  as |name|
+}}
+  {{name}}
+{{/power-select}}
+
+{{#power-select
+  selected=action1
+  options=commands
+  onchange=(action "action1")
+  as |name|
+}}
+  {{name}}
+{{/power-select}}
+
+<input type="time" name="start" value="time1" onchange={{action "settime1"}}>
+
+<button id="sendcommand" {{action "save1" firstdevice action1 }}> Save </button>
+<button id="sendcommand" {{action "deletemini1" firstdevice action1}}> Delete </button>
 
 
+<br><br><br>
+{{info2}}
+{{#power-select
+  selected=seconddevice
+  options=realmod
+  onchange=(action "chooseDevice2")
+  as |name|
+}}
+  {{name}}
+{{/power-select}}
+
+{{#power-select
+  selected=action2
+  options=commands
+  onchange=(action "action2")
+  as |name|
+}}
+  {{name}}
+{{/power-select}}
+
+<input type="time" name="start" value="time2" onchange={{action "settime2"}}>
+
+<button id="sendcommand" {{action "save2" seconddevice action2 }}> Save </button>
+<button id="sendcommand" {{action "deletemini2" seconddevice action2}}> Delete </button>
 
 
+<br><br><br>
+{{info3}}
+{{#power-select
+  selected=thirddevice
+  options=realmod
+  onchange=(action "chooseDevice3")
+  as |name|
+}}
+  {{name}}
+{{/power-select}}
 
+{{#power-select
+  selected=action3
+  options=commands
+  onchange=(action "action3")
+  as |name|
+}}
+  {{name}}
+{{/power-select}}
+
+<input type="time" name="start" value="time3" onchange={{action "settime3"}}>
+
+<button id="sendcommand" {{action "save3" thirddevice action3}}> Save </button>
+<button id="sendcommand" {{action "deletemini3" thirddevice action3}}> Delete </button>

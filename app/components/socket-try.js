@@ -27,7 +27,7 @@ export default Component.extend({
 					var purestr = stringdata.replace(re, " ");
 					var jsobj = JSON.parse(purestr);
 					for (var i=0; i < jsobj.Results.length; i++){
-							if(!/((schedule)|(new)|(fs20log)|(temp)|(telnet)|(WEB)|(autocreate)|(global)|(Logfile)|(initialUsb)|(eventTypes))/.test(jsobj.Results[i].Name)){
+							if(!/((schedule)|(new)|(fs20log)|(temp)|(telnet)|(WEB)|(autocreate)|(global)|(Logfile)|(initialUsb)|(eventTypes)|(CUL)|(FileLog)|(HM_)|(Action)|(energy))/.test(jsobj.Results[i].Name)){
 								rawrealmodel.push(jsobj.Results[i]);
 							}
 						}
@@ -36,7 +36,7 @@ export default Component.extend({
             });
 			
 		socket.on('value', function(data) {
-		self.assign(data);
+			self.assign(data);
 		});
 		
 	},
